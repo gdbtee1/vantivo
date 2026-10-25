@@ -9,25 +9,40 @@ const projects = [
     id: '01',
     name: 'GOODFORM',
     type: 'BRAND EXPERIENCE / WEB DESIGN',
-    className: 'goodform',
     background: '#f3a2bc',
     foreground: '#862951',
+    image:
+      'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=1400&q=80',
+    kicker: 'A DIFFERENT KIND OF GOOD',
+    headline: 'goodform.',
+    cta: 'MAKE IT MEAN SOMETHING ↗',
+    align: 'center'
   },
   {
     id: '02',
     name: 'OBJECTS',
     type: 'E-COMMERCE / DEVELOPMENT',
-    className: 'objects',
     background: '#c6ed86',
     foreground: '#284a28',
+    image:
+      'https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=1400&q=80',
+    kicker: 'MODERN PRODUCT STORIES',
+    headline: 'OBJECTS',
+    cta: 'EVERYDAY, REIMAGINED.',
+    align: 'center'
   },
   {
     id: '03',
     name: 'OFFBEAT',
     type: 'CREATIVE DIRECTION / WEB DESIGN',
-    className: 'offbeat',
     background: '#b8c9ff',
     foreground: '#293da0',
+    image:
+      'https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1600&q=80',
+    kicker: 'NEVER ORDINARY',
+    headline: 'OFFBEAT!',
+    cta: 'CREATIVE CHAOS, ORGANIZED.',
+    align: 'left'
   }
 ]
 
@@ -40,44 +55,12 @@ const services = [
 function App() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [inquiryOpen, setInquiryOpen] = useState(false)
-  const [inquiry, setInquiry] = useState({
-    name: '',
-    email: '',
-    company: '',
-    service: 'Website Design',
-    budget: '$2,000–$5,000',
-    message: ''
-  })
-
-  const updateInquiry = (field, value) => {
-    setInquiry(previous => ({ ...previous, [field]: value }))
-  }
-
-  const submitInquiry = (event) => {
-    event.preventDefault()
-    const subject = 'New Vantivo Project Inquiry — ' + inquiry.company
-    const body = [
-      'Name: ' + inquiry.name,
-      'Email: ' + inquiry.email,
-      'Company: ' + inquiry.company,
-      'Service: ' + inquiry.service,
-      'Budget: ' + inquiry.budget,
-      '',
-      'Project Details:',
-      inquiry.message
-    ].join('\\n')
-
-    window.location.href =
-      'mailto:hello@vantivo.com?subject=' +
-      encodeURIComponent(subject) +
-      '&body=' +
-      encodeURIComponent(body)
-  }
 
   return (
     <div className="overflow-hidden bg-[#f7f3e9]">
       <CreativeCursor />
       <FloatingProjectCTA />
+
       <header className="relative z-50 flex min-h-[82px] items-center justify-between border-b-2 border-[#25231f] px-5 md:px-12">
         <a href="#home" className="display text-[29px] tracking-[-.09em] md:text-[38px]">
           vantivo<span className="text-[#f0643b]">✳</span>
@@ -87,7 +70,11 @@ function App() {
           <a className="hover:text-[#f0643b]" href="#services">WHAT WE DO</a>
           <a className="hover:text-[#f0643b]" href="#about">ABOUT US</a>
         </nav>
-        <a href="#contact" onClick={e => { e.preventDefault(); setInquiryOpen(true) }} className="hidden items-center gap-3 border-2 border-[#25231f] bg-[#f8e54b] px-5 py-3 text-xs font-extrabold transition-transform hover:-translate-y-1 md:flex">
+        <a
+          href="#contact"
+          onClick={e => { e.preventDefault(); setInquiryOpen(true) }}
+          className="hidden items-center gap-3 border-2 border-[#25231f] bg-[#f8e54b] px-5 py-3 text-xs font-extrabold transition-transform hover:-translate-y-1 md:flex"
+        >
           START A PROJECT <ArrowUpRight size={17}/>
         </a>
         <button className="md:hidden" aria-label="Toggle menu" onClick={() => setMenuOpen(!menuOpen)}>
@@ -161,43 +148,50 @@ function App() {
           </div>
 
           <Reveal>
-          <div className="grid gap-10 lg:grid-cols-2">
-            {projects.map((project,index)=>(
-              <article key={project.id} className={`project-link group ${index===2?'lg:col-span-2':''}`}>
-                <div className={`relative flex h-[340px] overflow-hidden border-2 border-[#25231f] md:h-[490px] ${index===2?'lg:h-[540px]':''}`} style={{background:project.background,color:project.foreground}}>
-                  <div className="absolute left-6 top-6 z-10 border-2 border-current bg-[#f7f3e9] px-3 py-2 text-xs font-black text-[#25231f]">V / {project.id}</div>
-                  <div className="project-visual flex h-full w-full flex-col items-center justify-center">
-                    {index===0&&<>
-                      <span className="text-[11px] font-black tracking-[.4em]">A DIFFERENT KIND OF GOOD</span>
-                      <span className="display mt-5 -rotate-6 text-[clamp(3.5rem,8vw,8rem)]">goodform.</span>
-                      <span className="mt-4 rounded-full border-2 border-current px-7 py-2 text-xs font-black">MAKE IT MEAN SOMETHING ↗</span>
-                    </>}
-                    {index===1&&<>
-                      <div className="mb-6 flex gap-2">
-                        {[0,1,2].map(n=><div key={n} className="h-12 w-12 rotate-12 border-[8px] border-current md:h-20 md:w-20"/>)}
-                      </div>
-                      <span className="display text-[clamp(3.5rem,8vw,7rem)]">OBJECTS</span>
-                      <span className="text-xs font-black tracking-[.28em]">EVERYDAY, REIMAGINED.</span>
-                    </>}
-                    {index===2&&<>
-                      <div className="absolute left-[8%] top-[20%] h-20 w-20 rotate-12 rounded-full bg-[#f8e54b] md:h-32 md:w-32"/>
-                      <div className="absolute bottom-[13%] right-[11%] h-20 w-20 -rotate-12 bg-[#f0643b] md:h-36 md:w-36"/>
-                      <span className="display relative z-10 -rotate-3 text-[clamp(4rem,14vw,13rem)] italic">OFFBEAT!</span>
-                      <span className="relative z-10 bg-[#f7f3e9] px-5 py-2 text-xs font-black tracking-widest">NEVER ORDINARY</span>
-                    </>}
+            <div className="grid gap-10 lg:grid-cols-2">
+              {projects.map((project,index)=>(
+                <article key={project.id} className={`project-link group ${index===2?'lg:col-span-2':''}`}>
+                  <div
+                    className={`relative flex h-[340px] overflow-hidden border-2 border-[#25231f] md:h-[490px] ${index===2?'lg:h-[560px]':''}`}
+                    style={{background:project.background,color:project.foreground}}
+                  >
+                    <img
+                      src={project.image}
+                      alt={project.name}
+                      className="absolute inset-0 h-full w-full object-cover"
+                    />
+
+                    <div className="absolute inset-0 bg-[linear-gradient(to_top,rgba(20,20,20,.58),rgba(20,20,20,.12))]" />
+
+                    <div className="absolute left-6 top-6 z-10 border-2 border-[#25231f] bg-[#f7f3e9] px-3 py-2 text-xs font-black text-[#25231f]">
+                      V / {project.id}
+                    </div>
+
+                    <div className={`project-visual relative z-10 flex h-full w-full flex-col justify-end p-8 text-white md:p-10 ${project.align === 'center' ? 'items-start' : 'items-start'}`}>
+                      <span className="text-[11px] font-black tracking-[.35em] text-white/90">
+                        {project.kicker}
+                      </span>
+                      <span className="display mt-4 text-[clamp(3.2rem,8vw,8rem)] leading-[.92] text-white drop-shadow-[0_2px_0_rgba(0,0,0,.22)]">
+                        {project.headline}
+                      </span>
+                      <span className="mt-5 inline-flex w-fit border-2 border-white bg-white/12 px-6 py-3 text-xs font-black tracking-[.08em] backdrop-blur-[2px]">
+                        {project.cta}
+                      </span>
+                    </div>
                   </div>
-                </div>
-                <div className="flex items-center justify-between gap-4 border-b-2 border-[#25231f] py-5">
-                  <div>
-                    <h3 className="display text-2xl md:text-3xl">{project.name}</h3>
-                    <p className="mt-2 text-[11px] font-bold tracking-wider">{project.type}</p>
+
+                  <div className="flex items-center justify-between gap-4 border-b-2 border-[#25231f] py-5">
+                    <div>
+                      <h3 className="display text-2xl md:text-3xl">{project.name}</h3>
+                      <p className="mt-2 text-[11px] font-bold tracking-wider">{project.type}</p>
+                    </div>
+                    <MoveUpRight size={28}/>
                   </div>
-                  <MoveUpRight size={28}/>
-                </div>
-              </article>
-            ))}
-          </div>
+                </article>
+              ))}
+            </div>
           </Reveal>
+
           <p className="mt-6 text-xs font-semibold text-[#655e54]">* Featured concepts are illustrative design explorations, not client commissions.</p>
         </section>
 
@@ -238,83 +232,13 @@ function App() {
             <span className="text-xs font-extrabold">YOUR NEXT BIG THING STARTS HERE ↘</span>
           </div>
           <h2 className="display my-14 text-[clamp(4rem,12vw,13rem)] leading-[.89]">LET'S MAKE<br/>SOME <span className="outline-text">NOISE.</span></h2>
-          <div className="mt-16 grid gap-12 border-t-2 border-[#25231f] pt-12 lg:grid-cols-[.65fr_1fr]">
-            <div>
-              <div className="display mb-8 text-[clamp(2.5rem,5vw,5rem)] leading-none">
-                YOUR IDEA.<br/>OUR NEXT<br/>OBSESSION.
-              </div>
-              <p className="max-w-sm text-lg font-semibold leading-relaxed">
-                Tell us a little about what you're building. The more interesting the challenge, the better.
-              </p>
-              <div className="mt-12 inline-flex -rotate-6 border-2 border-[#25231f] bg-[#f0643b] px-6 py-4 text-lg font-black shadow-[6px_6px_0_#25231f]">
-                NO BORING WEBSITES ALLOWED ✳
-              </div>
-            </div>
-
-            <form onSubmit={submitInquiry} className="space-y-8">
-              <div className="grid gap-7 sm:grid-cols-2">
-                <label className="block">
-                  <span className="mb-3 block text-xs font-black tracking-widest">YOUR NAME *</span>
-                  <input required value={inquiry.name} onChange={e => updateInquiry('name', e.target.value)}
-                    placeholder="Your name" className="vantivo-input" />
-                </label>
-                <label className="block">
-                  <span className="mb-3 block text-xs font-black tracking-widest">EMAIL ADDRESS *</span>
-                  <input type="email" required value={inquiry.email} onChange={e => updateInquiry('email', e.target.value)}
-                    placeholder="you@company.com" className="vantivo-input" />
-                </label>
-              </div>
-
-              <label className="block">
-                <span className="mb-3 block text-xs font-black tracking-widest">COMPANY / BRAND *</span>
-                <input required value={inquiry.company} onChange={e => updateInquiry('company', e.target.value)}
-                  placeholder="What is your brand called?" className="vantivo-input" />
-              </label>
-
-              <div>
-                <span className="mb-4 block text-xs font-black tracking-widest">WHAT ARE WE BUILDING?</span>
-                <div className="flex flex-wrap gap-3">
-                  {['Website Design','Web Development','Digital Experience','Not Sure Yet'].map(service => (
-                    <button type="button" key={service} onClick={() => updateInquiry('service', service)}
-                      aria-pressed={inquiry.service === service}
-                      className={`vantivo-choice ${inquiry.service === service ? 'vantivo-choice-active' : ''}`}>
-                      {service}
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              <div>
-                <span className="mb-4 block text-xs font-black tracking-widest">ESTIMATED PROJECT BUDGET</span>
-                <div className="flex flex-wrap gap-3">
-                  {['Under $2,000','$2,000–$5,000','$5,000–$10,000','$10,000+'].map(budget => (
-                    <button type="button" key={budget} onClick={() => updateInquiry('budget', budget)}
-                      aria-pressed={inquiry.budget === budget}
-                      className={`vantivo-choice ${inquiry.budget === budget ? 'vantivo-choice-active' : ''}`}>
-                      {budget}
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              <label className="block">
-                <span className="mb-3 block text-xs font-black tracking-widest">TELL US ABOUT YOUR IDEA *</span>
-                <textarea required rows="5" value={inquiry.message}
-                  onChange={e => updateInquiry('message', e.target.value)}
-                  placeholder="The big idea, the weird idea, the ambitious idea. We're listening."
-                  className="vantivo-input resize-y" />
-              </label>
-
-              <button type="submit"
-                className="group flex w-full items-center justify-between border-2 border-[#25231f] bg-[#f7f3e9] px-6 py-6 text-left text-sm font-black shadow-[6px_6px_0_#25231f] transition-transform hover:-translate-y-1">
-                PREPARE MY PROJECT INQUIRY
-                <ArrowUpRight size={28} className="transition-transform group-hover:rotate-45"/>
-              </button>
-              <p className="text-xs font-semibold">
-                Your email application will open with your inquiry prefilled. Review and send it to complete your inquiry.
-              </p>
-            </form>
-          </div>
+          <a
+            href="#contact"
+            onClick={e => { e.preventDefault(); setInquiryOpen(true) }}
+            className="inline-flex items-center gap-5 border-2 border-[#25231f] bg-[#f7f3e9] px-7 py-5 text-sm font-black shadow-[6px_6px_0_#25231f] transition-transform hover:-translate-y-1"
+          >
+            TELL US ABOUT YOUR PROJECT <ArrowUpRight size={23}/>
+          </a>
         </section>
       </main>
 
@@ -331,6 +255,7 @@ function App() {
         </div>
         <span className="text-xs font-bold">© {new Date().getFullYear()} VANTIVO</span>
       </footer>
+
       <ProjectInquiry open={inquiryOpen} onClose={() => setInquiryOpen(false)} />
     </div>
   )
