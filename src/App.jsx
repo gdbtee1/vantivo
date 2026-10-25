@@ -1,3 +1,4 @@
+import ProjectInquiry from './ProjectInquiry.jsx'
 import { CreativeCursor, Reveal, StudioClock, FloatingProjectCTA } from './components.jsx'
 import { useState } from 'react'
 import { motion } from 'motion/react'
@@ -38,6 +39,7 @@ const services = [
 
 function App() {
   const [menuOpen, setMenuOpen] = useState(false)
+  const [inquiryOpen, setInquiryOpen] = useState(false)
   const [inquiry, setInquiry] = useState({
     name: '',
     email: '',
@@ -85,7 +87,7 @@ function App() {
           <a className="hover:text-[#f0643b]" href="#services">WHAT WE DO</a>
           <a className="hover:text-[#f0643b]" href="#about">ABOUT US</a>
         </nav>
-        <a href="mailto:hello@vantivo.com" className="hidden items-center gap-3 border-2 border-[#25231f] bg-[#f8e54b] px-5 py-3 text-xs font-extrabold transition-transform hover:-translate-y-1 md:flex">
+        <a href="#contact" onClick={e => { e.preventDefault(); setInquiryOpen(true) }} className="hidden items-center gap-3 border-2 border-[#25231f] bg-[#f8e54b] px-5 py-3 text-xs font-extrabold transition-transform hover:-translate-y-1 md:flex">
           START A PROJECT <ArrowUpRight size={17}/>
         </a>
         <button className="md:hidden" aria-label="Toggle menu" onClick={() => setMenuOpen(!menuOpen)}>
@@ -98,7 +100,7 @@ function App() {
           <a href="#work">OUR WORK</a>
           <a href="#services">WHAT WE DO</a>
           <a href="#about">ABOUT US</a>
-          <a href="mailto:hello@vantivo.com">START A PROJECT ↗</a>
+          <a href="#contact" onClick={e => { e.preventDefault(); setInquiryOpen(true) }}>START A PROJECT ↗</a>
         </nav>
       )}
 
@@ -325,10 +327,11 @@ function App() {
           <a href="#home">BACK TO TOP ↑</a>
           <a href="#work">WORK</a>
           <a href="#services">SERVICES</a>
-          <a href="mailto:hello@vantivo.com">CONTACT</a>
+          <a href="#contact" onClick={e => { e.preventDefault(); setInquiryOpen(true) }}>CONTACT</a>
         </div>
         <span className="text-xs font-bold">© {new Date().getFullYear()} VANTIVO</span>
       </footer>
+      <ProjectInquiry open={inquiryOpen} onClose={() => setInquiryOpen(false)} />
     </div>
   )
 }
