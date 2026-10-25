@@ -12,7 +12,7 @@ const projects = [
     background: '#f3a2bc',
     foreground: '#862951',
     image:
-      'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=1400&q=80',
+      'https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?auto=format&fit=crop&w=1600&q=85',
     kicker: 'A DIFFERENT KIND OF GOOD',
     headline: 'goodform.',
     cta: 'MAKE IT MEAN SOMETHING ↗',
@@ -25,7 +25,7 @@ const projects = [
     background: '#c6ed86',
     foreground: '#284a28',
     image:
-      'https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=1400&q=80',
+      'https://images.unsplash.com/photo-1494438639946-1ebd1d20bf85?auto=format&fit=crop&w=1600&q=85',
     kicker: 'MODERN PRODUCT STORIES',
     headline: 'OBJECTS',
     cta: 'EVERYDAY, REIMAGINED.',
@@ -38,7 +38,7 @@ const projects = [
     background: '#b8c9ff',
     foreground: '#293da0',
     image:
-      'https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1600&q=80',
+      'https://images.unsplash.com/photo-1558655146-9f40138edfeb?auto=format&fit=crop&w=1800&q=85',
     kicker: 'NEVER ORDINARY',
     headline: 'OFFBEAT!',
     cta: 'CREATIVE CHAOS, ORGANIZED.',
@@ -158,10 +158,22 @@ function App() {
                     <img
                       src={project.image}
                       alt={project.name}
-                      className="absolute inset-0 h-full w-full object-cover"
+                      className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
                     />
 
                     <div className="absolute inset-0 bg-[linear-gradient(to_top,rgba(20,20,20,.58),rgba(20,20,20,.12))]" />
+                    <div className="absolute left-0 right-0 top-0 z-20 flex h-12 items-center justify-between border-b-2 border-[#25231f] bg-[#f7f3e9] px-4 text-[#25231f]">
+                      <div className="flex gap-1.5">
+                        <span className="h-2.5 w-2.5 rounded-full bg-[#f0643b]"/>
+                        <span className="h-2.5 w-2.5 rounded-full bg-[#f8e54b]"/>
+                        <span className="h-2.5 w-2.5 rounded-full bg-[#c6ed86]"/>
+                      </div>
+                      <span className="text-[10px] font-extrabold tracking-wider">
+                        {project.name.toLowerCase()} / WEBSITE CONCEPT
+                      </span>
+                      <span className="text-sm font-black">↗</span>
+                    </div>
+
 
                     <div className="absolute left-6 top-6 z-10 border-2 border-[#25231f] bg-[#f7f3e9] px-3 py-2 text-xs font-black text-[#25231f]">
                       V / {project.id}
